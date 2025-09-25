@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Responsive</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --color-principal: #0d6efd;
+            --color-secundario: #f1f1f1;
+            --color-texto: #333;
+        }
+
+        body {
+            background-color: var(--color-secundario);
+            color: var(--color-texto);
+            font-family: Arial, sans-serif;
+        }
+
+        .jumbotron {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .producto {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background-color: var(--color-principal);
+            border: none;
+        }
+
+        footer {
+            background: #343a40;
+            color: white;
+            padding: 2rem 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left, .footer-center, .footer-right {
+            flex: 1;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .footer-left { text-align: left; }
+        .footer-center { text-align: center; }
+        .footer-right { text-align: right; }
+
+        .caracteristica {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--color-principal);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .jumbotron {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="jumbotron animate__animated animate__fadeIn text-white">
+        <h1 class="animate__animated animate__fadeInDown">Mi Proyecto Web Responsive</h1>
+        <p class="animate__animated animate__fadeInUp">Desarrollado con Bootstrap, Git y Bitbucket</p>
+    </header>
+
+    <main class="container my-5">
+        <section class="mb-5 animate__animated animate__fadeInUp">
+            <div class="row">
+                <div class="col-md-4 caracteristica animate__animated animate__fadeInLeft">
+                    <h4>Responsive Design</h4>
+                    <p>El sitio se adapta a cualquier dispositivo.</p>
+                </div>
+                <div class="col-md-4 caracteristica animate__animated animate__fadeInUp">
+                    <h4>Control de versiones</h4>
+                    <p>Repositorio Git alojado en Bitbucket.</p>
+                </div>
+                <div class="col-md-4 caracteristica animate__animated animate__fadeInRight">
+                    <h4>Grid System</h4>
+                    <p>Productos dispuestos usando grillas y Flex.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="animate__animated animate__fadeInUp">
+            <h2 class="mb-4 text-center">Lista de Productos</h2>
+            <div class="row d-flex flex-wrap justify-content-center" id="productos">
+                <!-- Productos generados dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <p>Síguenos:</p>
+                <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-center">
+                <address>
+                    📍 Avenida Principal 456, Ciudad
+                </address>
+            </div>
+            <div class="footer-right">
+                <p>&copy; 2025 Mi Sitio Responsive</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-to-top" id="scrollToTop">↑</div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        const productos = [
+            {
+                titulo: "Producto 1",
+                descripcion: "Descripción breve del producto."
+            },
+            {
+                titulo: "Producto 2",
+                descripcion: "Características sobresalientes."
+            },
+            {
+                titulo: "Producto 3",
+                descripcion: "El mejor de su clase."
+            }
+        ];
+
+        function renderizarProductos() {
+            const contenedor = document.getElementById("productos");
+            productos.forEach(prod => {
+                const html = `
+                    <div class="col-sm-6 col-md-4 mb-4 animate__animated animate__zoomIn">
+                        <div class="producto text-center">
+                            <h3>${prod.titulo}</h3>
+                            <p>${prod.descripcion}</p>
+                            <button class="btn btn-primary ver-mas">Comprar</button>
+                        </div>
+                    </div>
+                `;
+                contenedor.innerHTML += html;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarProductos();
+
+            // Botón scroll-to-top
+            const scrollBtn = document.getElementById('scrollToTop');
+            window.addEventListener('scroll', () => {
+                if (document.documentElement.scrollTop > 50) {
+                    scrollBtn.classList.add('visible');
+                } else {
+                    scrollBtn.classList.remove('visible');
+                }
+            });
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Efecto animado al hacer click en Comprar
+            document.body.addEventListener('click', e => {
+                if (e.target.classList.contains('ver-mas')) {
+                    const card = e.target.closest('.producto');
+                    card.classList.add('animate__animated', 'animate__pulse');
+                    setTimeout(() => {
+                        card.classList.remove('animate__pulse', 'animate__animated');
+                    }, 800);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
